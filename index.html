@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Verifier - Professional Email Validation Service</title>
+    <title>CK Email Verifier - Professional Email Validation Service</title>
     <style>
         * {
             margin: 0;
@@ -239,6 +239,7 @@
             border-radius: 12px;
             border: 1px solid var(--border);
             animation: slideIn 0.3s ease;
+            overflow: hidden;
         }
 
         @keyframes slideIn {
@@ -269,6 +270,7 @@
             margin-bottom: 1rem;
             font-size: 1.125rem;
             font-weight: 600;
+            flex-wrap: wrap;
         }
 
         .result-icon {
@@ -279,6 +281,7 @@
             align-items: center;
             justify-content: center;
             font-size: 18px;
+            flex-shrink: 0;
         }
 
         .result.success .result-icon {
@@ -289,9 +292,35 @@
             background: var(--error);
         }
 
+        /* Responsive Results Container */
         .result-details {
             display: grid;
             gap: 0.75rem;
+            width: 100%;
+        }
+
+        .result-details-scroll {
+            overflow-x: auto;
+            margin: 0 -1.5rem;
+            padding: 0 1.5rem;
+        }
+
+        .result-details-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .result-details-scroll::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 4px;
+        }
+
+        .result-details-scroll::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .result-details-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
         }
 
         .result-item {
@@ -301,12 +330,16 @@
             padding: 0.75rem;
             background: var(--bg-secondary);
             border-radius: 8px;
+            gap: 1rem;
+            min-width: 280px;
         }
 
         .result-label {
             color: var(--text-secondary);
             font-size: 0.875rem;
             font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .result-value {
@@ -314,6 +347,10 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            text-align: right;
+            word-break: break-word;
         }
 
         .badge {
@@ -323,6 +360,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            white-space: nowrap;
         }
 
         .badge.success {
@@ -353,6 +391,7 @@
             background: var(--bg-secondary);
             border-radius: 8px;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .score-circle {
@@ -366,6 +405,7 @@
             font-weight: 700;
             position: relative;
             background: var(--bg-card);
+            flex-shrink: 0;
         }
 
         .score-circle::before {
@@ -382,6 +422,7 @@
 
         .score-details {
             flex: 1;
+            min-width: 200px;
         }
 
         .score-label {
@@ -401,7 +442,7 @@
 
         .bulk-summary {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
@@ -427,6 +468,30 @@
             letter-spacing: 0.05em;
         }
 
+        .bulk-results-scroll {
+            overflow-x: auto;
+            margin: 0 -2rem;
+            padding: 0 2rem;
+        }
+
+        .bulk-results-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .bulk-results-scroll::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 4px;
+        }
+
+        .bulk-results-scroll::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .bulk-results-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
         .bulk-result-item {
             padding: 1rem;
             background: var(--bg-secondary);
@@ -436,6 +501,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
+            min-width: 300px;
+            flex-wrap: wrap;
         }
 
         .bulk-result-item.valid {
@@ -450,11 +518,14 @@
             font-family: 'Courier New', monospace;
             color: var(--text-primary);
             font-weight: 500;
+            word-break: break-all;
+            flex: 1;
+            min-width: 150px;
         }
 
         .options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
             padding: 1rem;
@@ -473,6 +544,7 @@
             height: 20px;
             accent-color: var(--primary);
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .checkbox-group label {
@@ -480,6 +552,7 @@
             text-transform: none;
             letter-spacing: normal;
             cursor: pointer;
+            font-size: 0.875rem;
         }
 
         footer {
@@ -506,24 +579,173 @@
             color: var(--primary-light);
             margin-top: 0.5rem;
             word-break: break-all;
+            overflow-wrap: break-word;
         }
 
+        /* Mobile Responsive Styles */
         @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
             h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
             }
 
             .tabs {
                 flex-direction: column;
                 gap: 0.5rem;
+                padding: 0.5rem;
+            }
+
+            .tab {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
             }
 
             .card {
-                padding: 1.5rem;
+                padding: 1rem;
+                border-radius: 12px;
+            }
+
+            .result {
+                padding: 1rem;
+                margin: 0 -0.5rem;
+                margin-top: 1.5rem;
+                border-radius: 8px;
+            }
+
+            .result-header {
+                font-size: 1rem;
+            }
+
+            .result-details-scroll {
+                margin: 0 -1rem;
+                padding: 0 1rem;
+            }
+
+            .result-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                padding: 0.875rem;
+                min-width: 260px;
+            }
+
+            .result-value {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .quality-score {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .score-details {
+                width: 100%;
             }
 
             .bulk-summary {
                 grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .summary-card {
+                padding: 1rem;
+            }
+
+            .summary-value {
+                font-size: 1.5rem;
+            }
+
+            .bulk-results-scroll {
+                margin: 0 -1rem;
+                padding: 0 1rem;
+            }
+
+            .bulk-result-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.875rem;
+                min-width: 260px;
+            }
+
+            .email-text {
+                font-size: 0.875rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.875rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+                padding: 0.875rem;
+            }
+
+            .api-endpoint {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.875rem;
+            }
+
+            .card {
+                padding: 0.875rem;
+            }
+
+            .result-item {
+                min-width: 240px;
+            }
+
+            .bulk-result-item {
+                min-width: 240px;
+            }
+
+            label {
+                font-size: 0.75rem;
+            }
+
+            input[type="email"],
+            input[type="text"],
+            textarea {
+                font-size: 0.875rem;
+                padding: 0.75rem;
+            }
+        }
+
+        /* Tablet Landscape */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .bulk-summary {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .options {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -586,11 +808,6 @@
 
                     <div id="singleResult"></div>
                 </div>
-
-                <!-- <div class="api-info">
-                    <strong>API Endpoint:</strong>
-                    <div class="api-endpoint" id="apiEndpointSingle">Configure your API URL below</div>
-                </div> -->
             </div>
 
             <!-- Bulk Verification Tab -->
@@ -665,14 +882,6 @@
         // 🔥 CONFIGURE YOUR API URL HERE 🔥
         const API_BASE_URL = 'https://email-verify-258331537925.asia-south1.run.app';
         
-        // Update the display
-        document.addEventListener('DOMContentLoaded', () => {
-            const endpointDisplay = document.getElementById('apiEndpointSingle');
-            if (endpointDisplay) {
-                endpointDisplay.textContent = API_BASE_URL;
-            }
-        });
-
         function switchTab(tabName, event) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -822,20 +1031,21 @@
                         <span>${isValid ? 'Valid Email' : 'Invalid Email'}</span>
                     </div>
                     
-                    <div class="result-details">
-                        <div class="result-item">
-                            <span class="result-label">Email</span>
-                            <span class="result-value email-text">${data.email}</span>
-                        </div>
-                        
-                        <div class="result-item">
-                            <span class="result-label">Status</span>
-                            <span class="result-value">
-                                <span class="badge ${isValid ? 'success' : 'error'}">
-                                    ${isValid ? 'Valid' : 'Invalid'}
+                    <div class="result-details-scroll">
+                        <div class="result-details">
+                            <div class="result-item">
+                                <span class="result-label">Email</span>
+                                <span class="result-value email-text">${data.email}</span>
+                            </div>
+                            
+                            <div class="result-item">
+                                <span class="result-label">Status</span>
+                                <span class="result-value">
+                                    <span class="badge ${isValid ? 'success' : 'error'}">
+                                        ${isValid ? 'Valid' : 'Invalid'}
+                                    </span>
                                 </span>
-                            </span>
-                        </div>
+                            </div>
             `;
             
             if (data.deliverable !== undefined) {
@@ -941,7 +1151,7 @@
                 `;
             }
             
-            html += `</div>`;
+            html += `</div></div>`;
             
             if (data.qualityScore) {
                 const score = data.qualityScore.score;
@@ -986,7 +1196,8 @@
                         </div>
                     </div>
                     
-                    <div class="result-details">
+                    <div class="bulk-results-scroll">
+                        <div class="result-details">
             `;
             
             data.results.forEach(result => {
@@ -1003,6 +1214,7 @@
             });
             
             html += `
+                        </div>
                     </div>
                 </div>
             `;
