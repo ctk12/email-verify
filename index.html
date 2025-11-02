@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verifier - Professional Email Validation Service</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1a2332 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: var(--bg-card);
+            padding: 0.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 0.875rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .input-hint {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success);
+        }
+
+        .result.error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--error);
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .result-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .result.success .result-icon {
+            background: var(--success);
+        }
+
+        .result.error .result-icon {
+            background: var(--error);
+        }
+
+        .result-details {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge.success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .badge.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--error);
+        }
+
+        .badge.warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .badge.info {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+        }
+
+        .quality-score {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .score-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            background: var(--bg-card);
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .score-details {
+            flex: 1;
+        }
+
+        .score-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .score-quality {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .bulk-results {
+            margin-top: 2rem;
+        }
+
+        .bulk-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .bulk-result-item {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 3px solid var(--border);
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bulk-result-item.valid {
+            border-left-color: var(--success);
+        }
+
+        .bulk-result-item.invalid {
+            border-left-color: var(--error);
+        }
+
+        .email-text {
+            font-family: 'Courier New', monospace;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            text-transform: none;
+            letter-spacing: normal;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .api-info {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        .api-endpoint {
+            background: var(--bg-secondary);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: var(--primary-light);
+            margin-top: 0.5rem;
+            word-break: break-all;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .bulk-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">✉️</div>
+                <div>
+                    <h1>Email Verifier</h1>
+                    <p class="subtitle">Professional Email Validation Service</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('single', event)">
+                    Single Email
+                </button>
+                <button class="tab" onclick="switchTab('bulk', event)">
+                    Bulk Verification
+                </button>
+                <button class="tab" onclick="switchTab('quick', event)">
+                    Quick Validation
+                </button>
+            </div>
+
+            <!-- Single Email Tab -->
+            <div id="single" class="tab-content active">
+                <div class="card">
+                    <form onsubmit="verifySingle(event)">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input 
+                                type="email" 
+                                id="singleEmail" 
+                                placeholder="user@example.com"
+                                required
+                            >
+                            <p class="input-hint">Enter an email address to verify</p>
+                        </div>
+
+                        <div class="options">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="checkSMTP" checked>
+                                <label for="checkSMTP">SMTP Verification</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="checkCatchAll" checked>
+                                <label for="checkCatchAll">Catch-all Detection</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="verifySingleBtn">
+                            <span>Verify Email</span>
+                        </button>
+                    </form>
+
+                    <div id="singleResult"></div>
+                </div>
+
+                <div class="api-info">
+                    <strong>API Endpoint:</strong>
+                    <div class="api-endpoint" id="apiEndpointSingle">Configure your API URL below</div>
+                </div>
+            </div>
+
+            <!-- Bulk Verification Tab -->
+            <div id="bulk" class="tab-content">
+                <div class="card">
+                    <form onsubmit="verifyBulk(event)">
+                        <div class="form-group">
+                            <label>Email Addresses (One per line, max 100)</label>
+                            <textarea 
+                                id="bulkEmails" 
+                                placeholder="user1@example.com&#10;user2@example.com&#10;user3@example.com"
+                                required
+                            ></textarea>
+                            <p class="input-hint">Enter up to 100 email addresses, one per line</p>
+                        </div>
+
+                        <div class="options">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bulkCheckSMTP" checked>
+                                <label for="bulkCheckSMTP">SMTP Verification</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bulkCheckCatchAll">
+                                <label for="bulkCheckCatchAll">Catch-all Detection</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="verifyBulkBtn">
+                            <span>Verify Bulk Emails</span>
+                        </button>
+                    </form>
+
+                    <div id="bulkResult"></div>
+                </div>
+            </div>
+
+            <!-- Quick Validation Tab -->
+            <div id="quick" class="tab-content">
+                <div class="card">
+                    <form onsubmit="validateQuick(event)">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input 
+                                type="email" 
+                                id="quickEmail" 
+                                placeholder="user@example.com"
+                                required
+                            >
+                            <p class="input-hint">Quick validation without SMTP check (faster, cheaper)</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="validateQuickBtn">
+                            <span>Quick Validate</span>
+                        </button>
+                    </form>
+
+                    <div id="quickResult"></div>
+                </div>
+
+                <div class="api-info">
+                    <p><strong>Quick Validation:</strong> This performs syntax, disposable, and domain checks without SMTP verification. It's faster and more cost-effective for basic validation.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Email Verifier API • Verify with Confidence</p>
+        </footer>
+    </div>
+
+    <script>
+        // 🔥 CONFIGURE YOUR API URL HERE 🔥
+        const API_BASE_URL = 'https://email-verify-258331537925.asia-south1.run.app';
+        
+        // Update the display
+        document.addEventListener('DOMContentLoaded', () => {
+            const endpointDisplay = document.getElementById('apiEndpointSingle');
+            if (endpointDisplay) {
+                endpointDisplay.textContent = API_BASE_URL;
+            }
+        });
+
+        function switchTab(tabName, event) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        async function verifySingle(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('singleEmail').value.trim();
+            const checkSMTP = document.getElementById('checkSMTP').checked;
+            const checkCatchAll = document.getElementById('checkCatchAll').checked;
+            const resultDiv = document.getElementById('singleResult');
+            const btn = document.getElementById('verifySingleBtn');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div><span>Verifying...</span>';
+            resultDiv.innerHTML = '';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}?action=verify`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        options: {
+                            checkSMTP: checkSMTP,
+                            checkCatchAll: checkCatchAll
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displaySingleResult(data, resultDiv);
+                } else {
+                    displayError(data.error || 'Verification failed', resultDiv);
+                }
+            } catch (error) {
+                displayError('Network error: ' + error.message, resultDiv);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>Verify Email</span>';
+            }
+        }
+
+        async function verifyBulk(event) {
+            event.preventDefault();
+            
+            const emailsText = document.getElementById('bulkEmails').value.trim();
+            const emails = emailsText.split('\n').map(e => e.trim()).filter(e => e);
+            const checkSMTP = document.getElementById('bulkCheckSMTP').checked;
+            const checkCatchAll = document.getElementById('bulkCheckCatchAll').checked;
+            const resultDiv = document.getElementById('bulkResult');
+            const btn = document.getElementById('verifyBulkBtn');
+            
+            if (emails.length > 100) {
+                displayError('Maximum 100 emails allowed per request', resultDiv);
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div><span>Verifying...</span>';
+            resultDiv.innerHTML = '';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}?action=bulk`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        emails: emails,
+                        options: {
+                            checkSMTP: checkSMTP,
+                            checkCatchAll: checkCatchAll
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayBulkResults(data, resultDiv);
+                } else {
+                    displayError(data.error || 'Verification failed', resultDiv);
+                }
+            } catch (error) {
+                displayError('Network error: ' + error.message, resultDiv);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>Verify Bulk Emails</span>';
+            }
+        }
+
+        async function validateQuick(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('quickEmail').value.trim();
+            const resultDiv = document.getElementById('quickResult');
+            const btn = document.getElementById('validateQuickBtn');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div><span>Validating...</span>';
+            resultDiv.innerHTML = '';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}?action=validate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displaySingleResult(data, resultDiv);
+                } else {
+                    displayError(data.error || 'Validation failed', resultDiv);
+                }
+            } catch (error) {
+                displayError('Network error: ' + error.message, resultDiv);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>Quick Validate</span>';
+            }
+        }
+
+        function displaySingleResult(data, container) {
+            const isValid = data.valid;
+            const resultClass = isValid ? 'success' : 'error';
+            const icon = isValid ? '✓' : '✗';
+            
+            let html = `
+                <div class="result ${resultClass}">
+                    <div class="result-header">
+                        <div class="result-icon">${icon}</div>
+                        <span>${isValid ? 'Valid Email' : 'Invalid Email'}</span>
+                    </div>
+                    
+                    <div class="result-details">
+                        <div class="result-item">
+                            <span class="result-label">Email</span>
+                            <span class="result-value email-text">${data.email}</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-label">Status</span>
+                            <span class="result-value">
+                                <span class="badge ${isValid ? 'success' : 'error'}">
+                                    ${isValid ? 'Valid' : 'Invalid'}
+                                </span>
+                            </span>
+                        </div>
+            `;
+            
+            if (data.deliverable !== undefined) {
+                const deliverableStatus = data.deliverable === true ? 'Deliverable' : 
+                                        data.deliverable === false ? 'Not Deliverable' : 
+                                        'Unknown';
+                const deliverableBadge = data.deliverable === true ? 'success' : 
+                                        data.deliverable === false ? 'error' : 
+                                        'warning';
+                
+                html += `
+                    <div class="result-item">
+                        <span class="result-label">Deliverable</span>
+                        <span class="result-value">
+                            <span class="badge ${deliverableBadge}">${deliverableStatus}</span>
+                        </span>
+                    </div>
+                `;
+            }
+            
+            if (data.checks) {
+                if (data.checks.disposable) {
+                    html += `
+                        <div class="result-item">
+                            <span class="result-label">Disposable</span>
+                            <span class="result-value">
+                                <span class="badge ${data.checks.disposable.isDisposable ? 'error' : 'success'}">
+                                    ${data.checks.disposable.isDisposable ? 'Yes' : 'No'}
+                                </span>
+                            </span>
+                        </div>
+                    `;
+                }
+                
+                if (data.checks.roleBased) {
+                    html += `
+                        <div class="result-item">
+                            <span class="result-label">Role-based</span>
+                            <span class="result-value">
+                                <span class="badge ${data.checks.roleBased.isRoleBased ? 'warning' : 'info'}">
+                                    ${data.checks.roleBased.isRoleBased ? 'Yes' : 'No'}
+                                </span>
+                            </span>
+                        </div>
+                    `;
+                }
+                
+                if (data.checks.freeProvider) {
+                    html += `
+                        <div class="result-item">
+                            <span class="result-label">Free Provider</span>
+                            <span class="result-value">
+                                <span class="badge ${data.checks.freeProvider.isFreeProvider ? 'info' : 'success'}">
+                                    ${data.checks.freeProvider.isFreeProvider ? 'Yes' : 'No'}
+                                </span>
+                            </span>
+                        </div>
+                    `;
+                }
+                
+                if (data.checks.catchAll) {
+                    html += `
+                        <div class="result-item">
+                            <span class="result-label">Catch-all</span>
+                            <span class="result-value">
+                                <span class="badge ${data.checks.catchAll.isCatchAll ? 'warning' : 'success'}">
+                                    ${data.checks.catchAll.isCatchAll ? 'Yes' : 'No'}
+                                </span>
+                            </span>
+                        </div>
+                    `;
+                }
+                
+                if (data.checks.domain && data.checks.domain.hasSPF !== undefined) {
+                    html += `
+                        <div class="result-item">
+                            <span class="result-label">SPF Record</span>
+                            <span class="result-value">
+                                <span class="badge ${data.checks.domain.hasSPF ? 'success' : 'warning'}">
+                                    ${data.checks.domain.hasSPF ? 'Yes' : 'No'}
+                                </span>
+                            </span>
+                        </div>
+                    `;
+                }
+            }
+            
+            if (data.reason) {
+                html += `
+                    <div class="result-item">
+                        <span class="result-label">Reason</span>
+                        <span class="result-value">${data.reason}</span>
+                    </div>
+                `;
+            }
+            
+            if (data.processingTime) {
+                html += `
+                    <div class="result-item">
+                        <span class="result-label">Processing Time</span>
+                        <span class="result-value">${data.processingTime}ms</span>
+                    </div>
+                `;
+            }
+            
+            html += `</div>`;
+            
+            if (data.qualityScore) {
+                const score = data.qualityScore.score;
+                const quality = data.qualityScore.quality;
+                
+                html += `
+                    <div class="quality-score">
+                        <div class="score-circle">
+                            ${score}
+                        </div>
+                        <div class="score-details">
+                            <div class="score-label">Quality Score</div>
+                            <div class="score-quality">${quality.replace('_', ' ').toUpperCase()}</div>
+                            ${data.qualityScore.reasons.length > 0 ? 
+                                '<div class="input-hint">' + data.qualityScore.reasons.join(', ') + '</div>' 
+                                : ''}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            html += `</div>`;
+            
+            container.innerHTML = html;
+        }
+
+        function displayBulkResults(data, container) {
+            let html = `
+                <div class="bulk-results">
+                    <div class="bulk-summary">
+                        <div class="summary-card">
+                            <div class="summary-value">${data.total}</div>
+                            <div class="summary-label">Total</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-value" style="color: var(--success);">${data.valid}</div>
+                            <div class="summary-label">Valid</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-value" style="color: var(--error);">${data.invalid}</div>
+                            <div class="summary-label">Invalid</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-details">
+            `;
+            
+            data.results.forEach(result => {
+                const isValid = result.valid;
+                const statusClass = isValid ? 'valid' : 'invalid';
+                const icon = isValid ? '✓' : '✗';
+                
+                html += `
+                    <div class="bulk-result-item ${statusClass}">
+                        <span class="email-text">${result.email}</span>
+                        <span class="badge ${isValid ? 'success' : 'error'}">${icon} ${isValid ? 'Valid' : 'Invalid'}</span>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function displayError(message, container) {
+            container.innerHTML = `
+                <div class="result error">
+                    <div class="result-header">
+                        <div class="result-icon">✗</div>
+                        <span>Error</span>
+                    </div>
+                    <div class="result-details">
+                        <div class="result-item">
+                            <span class="result-value">${message}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
