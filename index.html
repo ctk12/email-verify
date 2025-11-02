@@ -562,6 +562,126 @@
             font-size: 0.875rem;
         }
 
+        /* Information Section Styles */
+        .info-section {
+            max-width: 1200px;
+            margin: 4rem auto 2rem;
+            padding: 0 1.5rem;
+        }
+
+        .info-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .info-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .info-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.9375rem;
+        }
+
+        .info-card p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .info-tips {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-tips h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .tip-item {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--primary);
+            padding: 1.25rem;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .tip-item strong {
+            color: var(--primary-light);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+        }
+
         .api-info {
             background: var(--bg-card);
             border-radius: 12px;
@@ -702,6 +822,61 @@
             .api-endpoint {
                 font-size: 0.75rem;
             }
+
+            /* Info Section Mobile */
+            .info-section {
+                margin: 2rem auto 1rem;
+                padding: 0 1rem;
+            }
+
+            .info-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .info-header p {
+                font-size: 1rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .info-card {
+                padding: 1.25rem;
+            }
+
+            .info-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .info-card h3 {
+                font-size: 1rem;
+            }
+
+            .info-card p {
+                font-size: 0.875rem;
+            }
+
+            .info-tips {
+                padding: 1.25rem;
+            }
+
+            .info-tips h3 {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .tip-item {
+                padding: 1rem;
+            }
         }
 
         /* Small Mobile Devices */
@@ -735,6 +910,26 @@
             textarea {
                 font-size: 0.875rem;
                 padding: 0.75rem;
+            }
+
+            .info-header h2 {
+                font-size: 1.25rem;
+            }
+
+            .info-header p {
+                font-size: 0.875rem;
+            }
+
+            .info-card {
+                padding: 1rem;
+            }
+
+            .info-tips {
+                padding: 1rem;
+            }
+
+            .info-tips h3 {
+                font-size: 1.125rem;
             }
         }
 
@@ -872,6 +1067,120 @@
                 </div>
             </div>
         </main>
+
+        <!-- Information Section -->
+        <section class="info-section">
+            <div class="info-header">
+                <h2>📖 Understanding Your Results</h2>
+                <p>Learn what each verification check means and how to interpret the results</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">✉️</span>
+                        <h3>Valid/Invalid Status</h3>
+                    </div>
+                    <p>Indicates whether the email address passes all validation checks. A valid email has correct syntax, an existing domain, and passes deliverability tests.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">📬</span>
+                        <h3>Deliverable</h3>
+                    </div>
+                    <p><strong>Deliverable:</strong> Email can receive messages<br>
+                    <strong>Not Deliverable:</strong> Mailbox doesn't exist or is full<br>
+                    <strong>Unknown:</strong> Unable to verify (catch-all domain)</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">🗑️</span>
+                        <h3>Disposable Email</h3>
+                    </div>
+                    <p>Temporary email addresses from services like Mailinator or TempMail. These are often used for spam or one-time registrations and should typically be rejected.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">👤</span>
+                        <h3>Role-Based Email</h3>
+                    </div>
+                    <p>Generic addresses like info@, support@, sales@, or admin@. These aren't personal emails and may have multiple recipients. Consider your use case before accepting.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">🆓</span>
+                        <h3>Free Provider</h3>
+                    </div>
+                    <p>Email from free services like Gmail, Yahoo, or Outlook. Not necessarily bad, but business emails from company domains often indicate higher quality leads.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">🎯</span>
+                        <h3>Catch-All Domain</h3>
+                    </div>
+                    <p>A domain configured to accept all emails regardless of whether the mailbox exists. Makes it impossible to verify if a specific address is valid. Proceed with caution.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">🔒</span>
+                        <h3>SPF Record</h3>
+                    </div>
+                    <p>Sender Policy Framework - A DNS record that helps prevent email spoofing. Domains with SPF records are more legitimate and less likely to be used for spam.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">⚡</span>
+                        <h3>SMTP Verification</h3>
+                    </div>
+                    <p>Direct check with the mail server to verify if the mailbox exists. Most accurate method but slower. Disable for faster results when you only need basic validation.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">📊</span>
+                        <h3>Quality Score</h3>
+                    </div>
+                    <p>Overall email quality rating (0-100):<br>
+                    <strong>90-100:</strong> Excellent<br>
+                    <strong>70-89:</strong> Good<br>
+                    <strong>50-69:</strong> Fair<br>
+                    <strong>0-49:</strong> Poor</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">⏱️</span>
+                        <h3>Processing Time</h3>
+                    </div>
+                    <p>Time taken to complete verification in milliseconds. SMTP checks take longer (2-5 seconds) while quick validation is instant (under 100ms).</p>
+                </div>
+            </div>
+
+            <div class="info-tips">
+                <h3>💡 Pro Tips</h3>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <strong>For Marketing Lists:</strong> Reject disposable emails and consider quality score thresholds (>70 recommended).
+                    </div>
+                    <div class="tip-item">
+                        <strong>For User Registration:</strong> Use quick validation to ensure proper syntax without delays.
+                    </div>
+                    <div class="tip-item">
+                        <strong>For Business Leads:</strong> Check for free providers and role-based emails to identify high-value contacts.
+                    </div>
+                    <div class="tip-item">
+                        <strong>For Critical Communications:</strong> Enable SMTP verification and catch-all detection for maximum accuracy.
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <footer>
             <p>Powered by CK Email Verifier • Verify with Confidence</p>
